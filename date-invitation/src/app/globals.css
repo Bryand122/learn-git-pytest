@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette */
+  --color-cream: #f8f5f2;
+  --color-rose: #e86a92;
+  --color-rose-soft: #f9dbe5;
+  --color-bordeaux: #8e3b57;
+  --color-mist: #efebe7;
+
+  /* Typography — DM Sans is injected by next/font in the layout */
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+
+  /* Animations */
+  --animate-heartbeat: heartbeat 1.5s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 2.4s ease-out infinite;
+
+  @keyframes heartbeat {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.09);
+    }
+    40% {
+      transform: scale(0.98);
+    }
+    60% {
+      transform: scale(1.06);
+    }
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      box-shadow: 0 0 0 0 rgb(232 106 146 / 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 16px rgb(232 106 146 / 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgb(232 106 146 / 0);
+    }
+  }
+}
+
+/* Frosted-glass surface used by cards, toasts and modals */
+@utility glass {
+  background: rgb(255 255 255 / 0.68);
+  backdrop-filter: blur(22px) saturate(1.5);
+  -webkit-backdrop-filter: blur(22px) saturate(1.5);
+  border: 1px solid rgb(255 255 255 / 0.75);
+}
+
+/* Soft light falling on the top of a card (no overflow:hidden so
+   children — like the fleeing button — can escape the card bounds) */
+@utility card-light {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      110% 55% at 50% 0%,
+      rgb(255 255 255 / 0.85),
+      transparent 62%
+    );
+    pointer-events: none;
+  }
+}
+
+html,
+body {
+  min-height: 100dvh;
+}
+
+body {
+  background-color: var(--color-cream);
+  background-image:
+    radial-gradient(52rem 32rem at 12% -8%, rgb(232 106 146 / 0.1), transparent 60%),
+    radial-gradient(44rem 30rem at 105% 15%, rgb(142 59 87 / 0.08), transparent 62%),
+    radial-gradient(38rem 26rem at 50% 115%, rgb(232 106 146 / 0.09), transparent 65%);
+  background-attachment: fixed;
+  color: var(--color-bordeaux);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgb(232 106 146 / 0.25);
+}
